@@ -1,0 +1,38 @@
+[project]
+name = "courier-logistics-digital-twin"
+version = "0.2.0"
+description = "Local controllable simulation for a fictional Bucharest courier digital twin"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.11,<3",
+    "tzdata>=2025.2",
+]
+
+[project.scripts]
+courier-sim = "courier_sim.cli.app:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3,<9",
+    "ruff>=0.11,<1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/courier_sim"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
